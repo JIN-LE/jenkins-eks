@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eks-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eks
+  template:
+    metadata:
+      labels:
+        app: eks
+    spec:
+      containers:
+        - name: eks
+          image: 779557706754.dkr.ecr.ap-northeast-2.amazonaws.com/docker_autostart
+          ports:
+            - containerPort: 80
+          imagePullPolicy: Always
+          env:
+            - name: DATE
+              value: 'DATE_STRING'
